@@ -36,6 +36,7 @@ footer{background:#071b14;color:#d8e0dc;padding:38px 7%;display:flex;justify-con
 .close{position:absolute;right:15px;top:10px;border:0;background:none;font-size:30px;cursor:pointer;color:#555}
 .order-btn{border:0;width:100%;margin-top:20px;cursor:pointer}
 .offer-note{margin-top:8px;padding:10px 12px;border-radius:9px;background:#f8f2e5;color:#805f1e;font-weight:bold;font-size:13px}
+.upi-box{margin-top:10px;padding:14px;border-radius:10px;background:#f8f2e5;color:#4d5a52;font-size:13px}.upi-box strong{color:#8a6725}.upi-box p{margin:7px 0 10px;line-height:1.5}
 </style>
 
 </style>
@@ -148,6 +149,16 @@ footer{background:#071b14;color:#d8e0dc;padding:38px 7%;display:flex;justify-con
       <input id="mobile" type="tel" pattern="[0-9]{10}" placeholder="10 digit mobile number" required>
       <label>Full Address</label>
       <textarea id="address" rows="3" placeholder="House/Shop, Street, City, PIN" required></textarea>
+      <label>Payment Method</label>
+      <select id="payment" onchange="toggleUpi()" required>
+        <option value="COD">Cash on Delivery</option>
+        <option value="UPI">UPI Payment</option>
+      </select>
+      <div id="upiBox" class="upi-box" style="display:none">
+        <strong>UPI ID: 7404292043@pthdfc</strong>
+        <p>Use your UPI app to pay the order amount, then enter the UTR/transaction reference below.</p>
+        <input id="utr" type="text" placeholder="UPI Transaction / UTR number">
+      </div>
       <button class="btn order-btn" type="submit">Place Order on WhatsApp</button>
     </form>
   </div>
@@ -166,6 +177,10 @@ function updateOffer(){
   if(offer==='bogo'){qty.value=1; note.textContent='2 soaps • Pay ₹175 • 1 free';}
   if(offer==='combo'){qty.value=1; note.textContent='4 soaps • ₹300 total';}
 }
+function toggleUpi(){
+  const method=document.getElementById('payment').value;
+  document.getElementById('upiBox').style.display = method==='UPI' ? 'block' : 'none';
+}
 function sendOrder(e){
   e.preventDefault();
   const product=document.getElementById('product').value;
@@ -174,11 +189,14 @@ function sendOrder(e){
   const name=document.getElementById('name').value.trim();
   const mobile=document.getElementById('mobile').value.trim();
   const address=document.getElementById('address').value.trim();
+  const payment=document.getElementById('payment').value;
+  const utr=document.getElementById('utr') ? document.getElementById('utr').value.trim() : '';
   let unitQty=1, offerName='', total=0;
   if(offer==='single'){unitQty=qty; offerName='1 Soap — ₹175 each'; total=175*qty;}
   if(offer==='bogo'){unitQty=qty*2; offerName='Buy 1 Get 1 Free'; total=175*qty;}
   if(offer==='combo'){unitQty=qty*4; offerName='4 Soaps Combo — ₹300'; total=300*qty;}
-  const msg=`*ELLNORA NEW ORDER*%0A%0AOffer: ${encodeURIComponent(offerName)}%0AProduct: ${encodeURIComponent(product)}%0AQuantity: ${unitQty} soaps%0AAmount: ₹${total}%0A%0ACustomer Name: ${encodeURIComponent(name)}%0AMobile: ${mobile}%0AAddress: ${encodeURIComponent(address)}%0A%0APlease confirm my order.`;
+  if(payment==='UPI' && !utr){alert('Please enter your UPI transaction / UTR number after payment.'); return;}
+  const msg=`*ELLNORA NEW ORDER*%0A%0AOffer: ${encodeURIComponent(offerName)}%0AProduct: ${encodeURIComponent(product)}%0AQuantity: ${unitQty} soaps%0AAmount: ₹${total}%0APayment: ${payment==='UPI'?'UPI — 7404292043@pthdfc':'Cash on Delivery'}%0A${payment==='UPI'?'UTR: '+encodeURIComponent(utr)+'%0A':''}%0AName: ${encodeURIComponent(name)}%0AMobile: ${mobile}%0AAddress: ${encodeURIComponent(address)}%0A%0APlease confirm my order.`;
   window.open('https://wa.me/918950845773?text='+msg,'_blank');
 }
 window.onclick=function(e){if(e.target===document.getElementById('orderModal'))closeOrder();}
