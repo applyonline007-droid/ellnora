@@ -11,8 +11,8 @@
 nav{position:sticky;top:0;z-index:20;background:rgba(11,45,34,.98);padding:14px 6%;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px #0002}
 .logo{font:700 28px Georgia,serif;letter-spacing:4px;color:var(--gold)}.tag{font-size:9px;letter-spacing:2px;color:#eee}
 nav a{color:#fff;text-decoration:none;margin-left:22px;font-size:14px}
-.hero{min-height:82vh;background:linear-gradient(90deg,rgba(5,28,20,.88),rgba(5,28,20,.38),rgba(5,28,20,.08)),url('neem-aloe-vera.jpg') center/cover;display:flex;align-items:center;padding:7%}
-.hero-inner{max-width:650px;color:#fff}.eyebrow{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:4px}.hero h1{font:normal 62px/1.05 Georgia,serif;margin:15px 0}.hero p{font-size:18px;line-height:1.7}.btn{display:inline-block;padding:14px 27px;border-radius:30px;background:var(--gold);color:#13251e;text-decoration:none;font-weight:bold;margin:8px 7px 0 0}.btn.alt{background:transparent;color:#fff;border:1px solid var(--gold)}
+.hero{min-height:82vh;background:linear-gradient(90deg,rgba(5,28,20,.88),rgba(5,28,20,.50),rgba(5,28,20,.16)),url('assets/neem-aloe-vera.jpg') center/cover;display:flex;align-items:center;padding:7%}
+.hero-inner{max-width:690px;color:#fff}.eyebrow{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:4px}.hero h1{font:normal 62px/1.05 Georgia,serif;margin:15px 0;text-shadow:0 3px 18px #0008}.hero p{font-size:19px;line-height:1.7;max-width:620px;text-shadow:0 2px 8px #0008}.hero-actions{margin-top:12px}.btn{display:inline-block;padding:14px 27px;border-radius:30px;background:var(--gold);color:#13251e;text-decoration:none;font-weight:bold;margin:8px 7px 0 0}.btn.alt{background:transparent;color:#fff;border:1px solid var(--gold)}.hero-points{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px;font-size:13px;color:#f6f0df}.hero-points span{padding:8px 12px;border:1px solid #ffffff3d;border-radius:20px;background:#0b2d2266}
 section{padding:78px 7%}.head{text-align:center;max-width:760px;margin:0 auto 42px}.head h2{font:normal 42px Georgia,serif;color:var(--green);margin:10px}.head p{color:#66746d;line-height:1.7}
 .products{background:var(--cream);display:grid;grid-template-columns:repeat(2,1fr);gap:28px}.head.full{grid-column:1/-1}
 .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 35px #153e3017}.product-photo{width:100%;height:440px;object-fit:cover;display:block}.card-body{padding:26px}.card h3{font:normal 29px Georgia,serif;color:var(--green);margin:0 0 8px}.card p{line-height:1.65;color:#65716c}.price{font-size:21px;font-weight:bold;color:#9c7428;margin:17px 0}.pill{display:inline-block;border:1px solid #ddc78f;border-radius:20px;padding:6px 11px;font-size:11px;margin:2px}
@@ -23,7 +23,21 @@ section{padding:78px 7%}.head{text-align:center;max-width:760px;margin:0 auto 42
 .contact{text-align:center;background:var(--cream)}.contact h2{font:normal 40px Georgia,serif;color:var(--green)}
 footer{background:#071b14;color:#d8e0dc;padding:38px 7%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}.footer-logo{font:28px Georgia,serif;color:var(--gold);letter-spacing:3px}.small{font-size:12px;color:#9ba9a2;line-height:1.6}
 @media(max-width:800px){nav a{display:none}.hero h1{font-size:45px}.products,.story{grid-template-columns:1fr}.features,.ingredients-grid{grid-template-columns:repeat(2,1fr)}section{padding:58px 5%}}
-@media(max-width:500px){.features,.ingredients-grid{grid-template-columns:1fr}.hero{min-height:75vh}.hero p{font-size:16px}.product-photo{height:360px}}
+@media(max-width:500px){.features,.ingredients-grid{grid-template-columns:1fr}.hero{min-height:75vh}.hero p{font-size:16px}.hero h1{font-size:46px}.hero-points{gap:8px}.product-photo{height:360px}}
+
+<style>
+.card .btn{cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:100;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:#fff;width:min(500px,100%);max-height:92vh;overflow:auto;border-radius:20px;padding:32px;position:relative;box-shadow:0 20px 60px #0005}
+.modal-box h2{font:normal 34px Georgia,serif;color:#0b2d22;margin:8px 0 22px}
+.modal-box label{display:block;font-size:13px;font-weight:bold;margin:12px 0 6px;color:#26352f}
+.modal-box input,.modal-box select,.modal-box textarea{width:100%;padding:12px;border:1px solid #d8d8d2;border-radius:9px;font:inherit}
+.modal-box textarea{resize:vertical}
+.close{position:absolute;right:15px;top:10px;border:0;background:none;font-size:30px;cursor:pointer;color:#555}
+.order-btn{border:0;width:100%;margin-top:20px;cursor:pointer}
+.offer-note{margin-top:8px;padding:10px 12px;border-radius:9px;background:#f8f2e5;color:#805f1e;font-weight:bold;font-size:13px}
+</style>
+
 </style>
 </head>
 <body>
@@ -34,27 +48,34 @@ footer{background:#071b14;color:#d8e0dc;padding:38px 7%;display:flex;justify-con
 
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="eyebrow">PREMIUM AYURVEDIC SOAP</div>
+    <div class="eyebrow">ELLNORA • AYURVEDIC SOAP</div>
     <h1>Luxury Rooted in Ayurveda.</h1>
-    <p>Meet ELLNORA's signature Ayurvedic-inspired soaps, created around the timeless beauty of botanical ingredients and a premium bathing experience.</p>
-    <a class="btn" href="#soaps">Explore Our Soaps</a>
-    <a class="btn alt" href="#contact">Order Now</a>
+    <p>Nature-inspired bathing care, presented with the elegance of a premium Ayurvedic brand.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#soaps">Shop Our Soaps</a>
+      <a class="btn alt" href="#offer">View Offer</a>
+    </div>
+    <div class="hero-points">
+      <span>🌿 Nature Inspired</span>
+      <span>✨ Premium Experience</span>
+      <span>🧼 100 g</span>
+    </div>
   </div>
 </section>
 
 <section id="soaps" class="products">
   <div class="head full"><div class="eyebrow">THE ELLNORA COLLECTION</div><h2>Our Signature Soaps</h2><p>Choose from two signature variants, each inspired by traditional Indian botanical ingredients.</p></div>
   <article class="card">
-    <img class="product-photo" src="neem-aloe-vera.jpg" alt="ELLNORA Neem & Aloe Vera Ayurvedic Soap">
+    <img class="product-photo" src="assets/neem-aloe-vera.jpg" alt="ELLNORA Neem & Aloe Vera Ayurvedic Soap">
     <div class="card-body"><h3>Neem & Aloe Vera</h3><p>With the goodness of Neem & Aloe Vera — a refreshing, nature-inspired choice for your daily bathing ritual.</p>
     <span class="pill">Neem</span><span class="pill">Aloe Vera</span><span class="pill">100 g</span>
-    <div class="price">MRP ₹175</div><a class="btn" href="#contact">Order Now</a></div>
+    <div class="price">MRP ₹175</div><button class="btn" type="button" onclick="openOrder()">Order Now</button></div>
   </article>
   <article class="card">
-    <img class="product-photo" src="haldi-chandan.jpg" alt="ELLNORA Haldi & Chandan Ayurvedic Soap">
+    <img class="product-photo" src="assets/haldi-chandan.jpg" alt="ELLNORA Haldi & Chandan Ayurvedic Soap">
     <div class="card-body"><h3>Haldi & Chandan</h3><p>A warm, traditional combination of Haldi & Chandan presented as a premium Ayurvedic-inspired bathing bar.</p>
     <span class="pill">Haldi</span><span class="pill">Chandan</span><span class="pill">100 g</span>
-    <div class="price">MRP ₹175</div><a class="btn" href="#contact">Order Now</a></div>
+    <div class="price">MRP ₹175</div><button class="btn" type="button" onclick="openOrder()">Order Now</button></div>
   </article>
 </section>
 
@@ -85,7 +106,7 @@ footer{background:#071b14;color:#d8e0dc;padding:38px 7%;display:flex;justify-con
  </div>
 </section>
 
-<section class="offer">
+<section class="offer" id="offer">
  <div class="eyebrow">SPECIAL OFFER</div><h2>Buy One. Get One Free.</h2><p>Ask us about the current <strong>introductory offer</strong> and combo availability.</p>
  <a class="btn" href="#contact">Get Offer</a>
 </section>
@@ -100,5 +121,68 @@ footer{background:#071b14;color:#d8e0dc;padding:38px 7%;display:flex;justify-con
  <div><div class="footer-logo">ELLNORA</div><div class="small">Luxury Rooted in Ayurveda</div></div>
  <div class="small">© 2026 ELLNORA. All rights reserved.</div>
 </footer>
+
+<div id="orderModal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeOrder()">×</button>
+    <div class="eyebrow">ELLNORA ORDER</div>
+    <h2>Place Your Order</h2>
+    <form onsubmit="sendOrder(event)">
+      <label>Choose Your Offer</label>
+      <select id="offer" onchange="updateOffer()" required>
+        <option value="single">1 Soap — ₹175</option>
+        <option value="bogo">Buy 1 Get 1 Free — ₹175</option>
+        <option value="combo">4 Soaps Combo — ₹300</option>
+      </select>
+      <label>Soap Variant</label>
+      <select id="product" required>
+        <option value="Neem & Aloe Vera Soap">Neem & Aloe Vera Soap</option>
+        <option value="Haldi & Chandan Soap">Haldi & Chandan Soap</option>
+      </select>
+      <label>Quantity / Packs</label>
+      <input id="qty" type="number" min="1" value="1" required>
+      <div id="offerNote" class="offer-note">1 soap • ₹175</div>
+      <label>Your Name</label>
+      <input id="name" type="text" placeholder="Enter your name" required>
+      <label>Mobile Number</label>
+      <input id="mobile" type="tel" pattern="[0-9]{10}" placeholder="10 digit mobile number" required>
+      <label>Full Address</label>
+      <textarea id="address" rows="3" placeholder="House/Shop, Street, City, PIN" required></textarea>
+      <button class="btn order-btn" type="submit">Place Order on WhatsApp</button>
+    </form>
+  </div>
+</div>
+<script>
+function openOrder(product){
+  document.getElementById('orderModal').style.display='flex';
+  if(product) document.getElementById('product').value=product;
+}
+function closeOrder(){document.getElementById('orderModal').style.display='none';}
+function updateOffer(){
+  const offer=document.getElementById('offer').value;
+  const qty=document.getElementById('qty');
+  const note=document.getElementById('offerNote');
+  if(offer==='single'){qty.value=1; note.textContent='1 soap • ₹175';}
+  if(offer==='bogo'){qty.value=1; note.textContent='2 soaps • Pay ₹175 • 1 free';}
+  if(offer==='combo'){qty.value=1; note.textContent='4 soaps • ₹300 total';}
+}
+function sendOrder(e){
+  e.preventDefault();
+  const product=document.getElementById('product').value;
+  const qty=Number(document.getElementById('qty').value);
+  const offer=document.getElementById('offer').value;
+  const name=document.getElementById('name').value.trim();
+  const mobile=document.getElementById('mobile').value.trim();
+  const address=document.getElementById('address').value.trim();
+  let unitQty=1, offerName='', total=0;
+  if(offer==='single'){unitQty=qty; offerName='1 Soap — ₹175 each'; total=175*qty;}
+  if(offer==='bogo'){unitQty=qty*2; offerName='Buy 1 Get 1 Free'; total=175*qty;}
+  if(offer==='combo'){unitQty=qty*4; offerName='4 Soaps Combo — ₹300'; total=300*qty;}
+  const msg=`*ELLNORA NEW ORDER*%0A%0AOffer: ${encodeURIComponent(offerName)}%0AProduct: ${encodeURIComponent(product)}%0AQuantity: ${unitQty} soaps%0AAmount: ₹${total}%0A%0ACustomer Name: ${encodeURIComponent(name)}%0AMobile: ${mobile}%0AAddress: ${encodeURIComponent(address)}%0A%0APlease confirm my order.`;
+  window.open('https://wa.me/918950845773?text='+msg,'_blank');
+}
+window.onclick=function(e){if(e.target===document.getElementById('orderModal'))closeOrder();}
+</script>
+
 </body>
 </html>
